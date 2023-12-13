@@ -66,14 +66,17 @@ class MainActivity : BaseActivity() {
 
     private fun onNoteClicked(note: NoteEntity?) {
         showToast(String.format(getString(R.string.toast_note_id_param), note?.noteId))
+        launchNewNote(note?.noteId)
     }
 
     private fun onNoteLongClicked(note: NoteEntity?) {
         showToast(String.format(getString(R.string.toast_note_id_param), note?.noteId))
     }
 
-    private fun launchNewNote() {
-        val intent = Intent(this, NewNoteActivity::class.java)
+    private fun launchNewNote(noteId: Int?) {
+        val intent = Intent(this, NewNoteActivity::class.java).apply {
+            putExtra(NewNoteActivity.EXTRA_NAME_NOTE_ID, noteId)
+        }
         newNoteLauncher.launch(intent)
     }
 
@@ -87,7 +90,7 @@ class MainActivity : BaseActivity() {
         super.onClick(view)
         when (view) {
             mBinding.addBtn -> {
-                launchNewNote()
+                launchNewNote(null)
             }
         }
     }
