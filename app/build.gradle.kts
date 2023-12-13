@@ -54,4 +54,8 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     // To use Kotlin Symbol Processing
     ksp("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 }
