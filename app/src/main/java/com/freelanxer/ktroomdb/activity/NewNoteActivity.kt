@@ -10,6 +10,7 @@ import com.freelanxer.ktroomdb.R
 import com.freelanxer.ktroomdb.databinding.ActivityNewNoteBinding
 import com.freelanxer.ktroomdb.db.entity.NoteEntity
 import com.freelanxer.ktroomdb.db.repository.NoteRepository
+import com.freelanxer.ktroomdb.extension.hideKeyboard
 import com.freelanxer.ktroomdb.viewmodel.NoteViewModel
 import com.freelanxer.ktroomdb.viewmodel.NoteViewModelRepository
 import kotlinx.coroutines.launch
@@ -69,6 +70,7 @@ class NewNoteActivity: BaseActivity() {
         super.onClick(view)
         when (view) {
             mBinding.saveBtn -> {
+                hideKeyboard()
                 saveNote()
             }
         }
