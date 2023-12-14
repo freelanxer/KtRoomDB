@@ -8,13 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.freelanxer.ktroomdb.Logger
 import com.freelanxer.ktroomdb.NoteApplication
 import com.freelanxer.ktroomdb.R
 import com.freelanxer.ktroomdb.adapter.NoteListAdapter
 import com.freelanxer.ktroomdb.databinding.ActivityMainBinding
 import com.freelanxer.ktroomdb.db.entity.NoteEntity
 import com.freelanxer.ktroomdb.db.repository.NoteRepository
+import com.freelanxer.ktroomdb.view.NoteListBottomSheet
 import com.freelanxer.ktroomdb.viewmodel.NoteViewModel
 import com.freelanxer.ktroomdb.viewmodel.NoteViewModelRepository
 import kotlinx.coroutines.launch
@@ -57,20 +57,32 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun onReceiveNotes(noteList: List<NoteEntity>?) {
-        noteList?.forEach() {
-            Logger.logD("onReceiveNotes: $it")
+    private fun deleteNote(note: NoteEntity) {
+        lifecycle.coroutineScope.launch {
+            viewModel.deleteNote(note)
         }
+    }
+
+    private fun showBottomSheet(note: NoteEntity) {
+        val sheet = NoteListBottomSheet.newInstance(note)
+        sheet.setCallback {noteToDelete ->
+            deleteNote(noteToDelete)
+        }
+        sheet.show(supportFragmentManager, NoteListBottomSheet.TAG)
+    }
+
+    private fun onReceiveNotes(noteList: List<NoteEntity>?) {
         mNoteAdapter.setData(noteList)
     }
 
     private fun onNoteClicked(note: NoteEntity?) {
-        showToast(String.format(getString(R.string.toast_note_id_param), note?.noteId))
         launchNewNote(note?.noteId)
     }
 
     private fun onNoteLongClicked(note: NoteEntity?) {
-        showToast(String.format(getString(R.string.toast_note_id_param), note?.noteId))
+        note?.let {
+            showBottomSheet(it)
+        }
     }
 
     private fun launchNewNote(noteId: Int?) {

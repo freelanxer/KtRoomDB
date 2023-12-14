@@ -63,7 +63,6 @@ class NewNoteActivity: BaseActivity() {
             else
                 viewModel.updateNote(noteToSave)
         }
-
     }
 
     override fun onClick(view: View?) {
