@@ -25,6 +25,7 @@
             android:hint="@string/subjection">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/subjection_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{note.subjection}"
@@ -43,6 +44,7 @@
             android:hint="@string/content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/content_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"

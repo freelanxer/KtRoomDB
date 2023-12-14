@@ -17,8 +17,12 @@ class NoteViewModel(private val repository: NoteRepository): ViewModel() {
 
     fun queryNoteById(noteId: Int): Flow<NoteEntity?> = repository.queryById(noteId)
 
-    fun insertNote(editor: String, subjection: String, content: String) = viewModelScope.launch {
-        repository.insert(NoteEntity(0, editor, subjection, content))
+    fun insertNote(note: NoteEntity) = viewModelScope.launch {
+        repository.insertNote(note)
+    }
+
+    fun updateNote(note: NoteEntity) = viewModelScope.launch {
+        repository.updateNote(note)
     }
 
     fun deleteNote(note: NoteEntity) = viewModelScope.launch {

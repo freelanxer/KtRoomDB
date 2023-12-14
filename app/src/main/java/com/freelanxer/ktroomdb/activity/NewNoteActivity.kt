@@ -8,6 +8,7 @@ import androidx.lifecycle.coroutineScope
 import com.freelanxer.ktroomdb.NoteApplication
 import com.freelanxer.ktroomdb.R
 import com.freelanxer.ktroomdb.databinding.ActivityNewNoteBinding
+import com.freelanxer.ktroomdb.db.entity.NoteEntity
 import com.freelanxer.ktroomdb.db.repository.NoteRepository
 import com.freelanxer.ktroomdb.viewmodel.NoteViewModel
 import com.freelanxer.ktroomdb.viewmodel.NoteViewModelRepository
@@ -25,24 +26,52 @@ class NewNoteActivity: BaseActivity() {
     }
 
     private var mNoteId  = -1
+    private var mNote: NoteEntity? = null
+
+    private fun isNewNote() = mNoteId == -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mNoteId = intent.getIntExtra(EXTRA_NAME_NOTE_ID, -1)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_note)
 
-        queryNoteById(mNoteId)
+        mBinding.saveBtn.setOnClickListener(this)
+
+        if (!isNewNote())
+            queryNoteById(mNoteId)
     }
 
     private fun queryNoteById(notId: Int) {
         lifecycle.coroutineScope.launch {
             viewModel.queryNoteById(notId).collect() {
-                mBinding.note = it
+                mNote = it
+                mBinding.note = mNote
             }
         }
     }
 
+    private fun saveNote() {
+        val noteToSave = mNote ?: NoteEntity()
+        noteToSave.apply {
+            subjection = mBinding.subjectionEt.text.toString()
+            content = mBinding.contentEt.text.toString()
+        }
+        lifecycle.coroutineScope.launch {
+            if (isNewNote())
+                viewModel.insertNote(noteToSave)
+            else
+                viewModel.updateNote(noteToSave)
+        }
+
+    }
+
     override fun onClick(view: View?) {
         super.onClick(view)
+        when (view) {
+            mBinding.saveBtn -> {
+                saveNote()
+            }
+        }
     }
+
 }

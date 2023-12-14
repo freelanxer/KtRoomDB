@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.freelanxer.ktroomdb.db.entity.NoteEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -17,6 +18,9 @@ interface NoteDao {
 
     @Insert
     suspend fun insertNotes(vararg notes: NoteEntity)
+
+    @Update
+    suspend fun updateNote(note: NoteEntity)
 
     @Delete
     suspend fun deleteNote(note: NoteEntity)

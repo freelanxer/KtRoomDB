@@ -12,8 +12,12 @@ class NoteRepository(private val noteDao: NoteDao)
         return noteDao.queryNoteById(noteId)
     }
 
-    suspend fun insert(note: NoteEntity) {
+    suspend fun insertNote(note: NoteEntity) {
         noteDao.insertNotes(note)
+    }
+
+    suspend fun updateNote(note: NoteEntity) {
+        noteDao.updateNote(note)
     }
 
     suspend fun deleteNote(note: NoteEntity) {
