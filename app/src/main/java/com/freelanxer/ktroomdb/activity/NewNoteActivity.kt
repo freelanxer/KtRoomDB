@@ -69,6 +69,7 @@ class NewNoteActivity: BaseActivity() {
             viewModel.updateNote(noteToSave)
             mBinding.note = mNote
         }
+        showSnackBar(mBinding.root, R.string.snack_message_saved)
     }
 
     override fun onClick(view: View?) {

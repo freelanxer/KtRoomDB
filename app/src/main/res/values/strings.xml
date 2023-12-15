@@ -6,4 +6,6 @@
     <string name="content">Content</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="done">Done</string>
+    <string name="snack_message_saved">Saved successfully</string>
 </resources>
