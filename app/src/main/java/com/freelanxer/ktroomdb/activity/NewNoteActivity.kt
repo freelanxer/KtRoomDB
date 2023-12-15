@@ -54,7 +54,7 @@ class NewNoteActivity: BaseActivity() {
     private fun saveNote() {
         val noteToSave = mNote ?: NoteEntity()
         noteToSave.apply {
-            subjection = mBinding.subjectionEt.text.toString()
+            subject = mBinding.subjectionEt.text.toString()
             content = mBinding.contentEt.text.toString()
         }
         if (isNewNote()) {

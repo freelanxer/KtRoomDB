@@ -15,8 +15,8 @@ data class NoteEntity(
     @ColumnInfo(name = "editor_name")
     var editorName: String? = null,
 
-    @ColumnInfo(name = "subjection")
-    var subjection: String? = null,
+    @ColumnInfo(name = "subject")
+    var subject: String? = null,
 
     @ColumnInfo(name = "content")
     var content: String? = null,
@@ -40,7 +40,7 @@ data class NoteEntity(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(noteId)
         parcel.writeString(editorName)
-        parcel.writeString(subjection)
+        parcel.writeString(subject)
         parcel.writeString(content)
         parcel.writeValue(updateTime)
     }

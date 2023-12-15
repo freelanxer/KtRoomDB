@@ -22,13 +22,13 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:hint="@string/subjection">
+            android:hint="@string/subject">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/subjection_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{note.subjection}"
+                android:text="@{note.subject}"
                 android:gravity="top"/>
 
         </com.google.android.material.textfield.TextInputLayout>

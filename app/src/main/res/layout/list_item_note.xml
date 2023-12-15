@@ -29,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_xxx_large"
-                android:text="@{note.subjection}"
-                tools:text="Subjection"/>
+                android:text="@{note.subject}"
+                tools:text="Subject"/>
 
             <TextView
                 android:layout_width="wrap_content"
