@@ -12,12 +12,14 @@ class NoteRepository(private val noteDao: NoteDao)
         return noteDao.queryNoteById(noteId)
     }
 
-    suspend fun insertNote(note: NoteEntity) {
-        noteDao.insertNotes(note)
+    suspend fun insertNote(note: NoteEntity): Long {
+        return noteDao.insertNotes(note)
     }
 
     suspend fun updateNote(note: NoteEntity) {
-        noteDao.updateNote(note)
+        noteDao.updateNote(note.apply {
+            updateTime = System.currentTimeMillis()
+        })
     }
 
     suspend fun deleteNote(note: NoteEntity) {

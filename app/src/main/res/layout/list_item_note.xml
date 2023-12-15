@@ -27,7 +27,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_x_large"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_xxx_large"
                 android:text="@{note.subjection}"
                 tools:text="Subjection"/>
 
@@ -35,9 +36,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="@dimen/text_size_x_large"
                 android:text="@{note.content}"
                 tools:text="Content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/text_size_middle"
+                android:text="@{note.formattedUpdateTime()}"
+                tools:text="2023/12/12 15:30"/>
 
         </LinearLayout>
 

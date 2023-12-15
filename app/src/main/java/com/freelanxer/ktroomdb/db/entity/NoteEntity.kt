@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.freelanxer.ktroomdb.extension.millisToDefaultDateTimeFormat
 
 @Entity(tableName = "table_note")
 data class NoteEntity(
@@ -19,13 +20,21 @@ data class NoteEntity(
 
     @ColumnInfo(name = "content")
     var content: String? = null,
+
+    @ColumnInfo(name = "update_time")
+    var updateTime: Long? = System.currentTimeMillis(),
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long
     ) {
+    }
+
+    fun formattedUpdateTime(): String? {
+        return updateTime?.millisToDefaultDateTimeFormat()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -33,6 +42,7 @@ data class NoteEntity(
         parcel.writeString(editorName)
         parcel.writeString(subjection)
         parcel.writeString(content)
+        parcel.writeValue(updateTime)
     }
 
     override fun describeContents(): Int {

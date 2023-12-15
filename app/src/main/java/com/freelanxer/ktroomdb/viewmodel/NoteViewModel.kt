@@ -1,6 +1,7 @@
 package com.freelanxer.ktroomdb.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -17,8 +18,13 @@ class NoteViewModel(private val repository: NoteRepository): ViewModel() {
 
     fun queryNoteById(noteId: Int): Flow<NoteEntity?> = repository.queryById(noteId)
 
-    fun insertNote(note: NoteEntity) = viewModelScope.launch {
-        repository.insertNote(note)
+    fun insertNote(note: NoteEntity): LiveData<Long> {
+        val idLiveData = MutableLiveData<Long>()
+        viewModelScope.launch {
+            val id = repository.insertNote(note)
+            idLiveData.value = id
+        }
+        return idLiveData
     }
 
     fun updateNote(note: NoteEntity) = viewModelScope.launch {

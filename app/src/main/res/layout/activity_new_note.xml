@@ -53,6 +53,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{note.formattedUpdateTime()}"
+            android:layout_below="@+id/content_field"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            tools:text="2023/12/30 15:30"/>
+
         <Button
             android:id="@+id/save_btn"
             android:layout_width="wrap_content"

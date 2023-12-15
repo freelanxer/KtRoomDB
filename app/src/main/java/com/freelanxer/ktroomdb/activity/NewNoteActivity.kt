@@ -57,11 +57,17 @@ class NewNoteActivity: BaseActivity() {
             subjection = mBinding.subjectionEt.text.toString()
             content = mBinding.contentEt.text.toString()
         }
-        lifecycle.coroutineScope.launch {
-            if (isNewNote())
-                viewModel.insertNote(noteToSave)
-            else
-                viewModel.updateNote(noteToSave)
+        if (isNewNote()) {
+            viewModel.insertNote(noteToSave).observe(this) { id ->
+                noteToSave.noteId = id.toInt()
+                mNote = noteToSave.also {
+                    mNoteId = it.noteId
+                }
+                mBinding.note = mNote
+            }
+        } else {
+            viewModel.updateNote(noteToSave)
+            mBinding.note = mNote
         }
     }
 
