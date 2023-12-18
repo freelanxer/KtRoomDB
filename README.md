@@ -7,9 +7,9 @@
 - LiveData
 - ViewModel
 
-![Query](./screenshot/Screenshot_20231215_173724.png)
-![Insert & Update](./screenshot/Screenshot_20231215_173349.png)
-![Delete](./screenshot/Screenshot_20231215_173808.png)
+![Query](./screenshot/Screenshot_20231218_135911.png)
+![Insert & Update](./screenshot/Screenshot_20231218_135938.png)
+![Delete](./screenshot/Screenshot_20231218_140028.png)
 
 ### NoteEntity
 
