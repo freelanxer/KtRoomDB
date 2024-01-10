@@ -20,7 +20,6 @@ class NoteListBottomSheet: BottomSheetDialogFragment() {
         fun newInstance(note: NoteEntity?) = NoteListBottomSheet().apply {
             arguments = Bundle().also {
                 it.putParcelable(EXTRA_NAME_NOTE, note)
-                it.putParcelable("AA", note)
             }
         }
     }
